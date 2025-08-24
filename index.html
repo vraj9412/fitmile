@@ -136,6 +136,11 @@
       .shadow-soft {
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
       }
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+      }
     </style>
   </head>
   <body>
@@ -243,56 +248,54 @@
           </div>
           <div class="col-lg-6">
             <div class="hero-card p-3 p-md-4">
-              <form class="row g-3">
+              <div class="row g-3">
                 <div class="col-12">
-                  <label class="form-label">Search clothes near</label>
-                  <div class="input-group input-group-lg">
-                    <span class="input-group-text"
-                      ><i class="bi bi-geo"></i
-                    ></span>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Enter area, city (e.g., Gandhinagar)"
-                      aria-label="location"
-                    />
-                  </div>
-                </div>
+  <label class="form-label">Search clothes near</label>
+  <div class="input-group input-group-lg">
+    <span class="input-group-text"><i class="bi bi-geo"></i></span>
+    <select
+      id="locationSelect"
+      class="form-select form-select-lg"
+      aria-label="Location select"
+    >
+      <option value="" selected>Any</option>
+      <option value="Gandhinagar">Gandhinagar</option>
+      <option value="Ahmedabad">Ahmedabad</option>
+      <option value="Motera">Motera</option>
+      <option value="Chandkheda">Chandkheda</option>
+      <option value="Sargasan">Sargasan</option>
+      <option value="Kudasan">Kudasan</option>
+    </select>
+  </div>
+</div>
                 <div class="col-md-6">
                   <label class="form-label">Category</label>
-                  <select class="form-select">
-                    <option selected>All</option>
-                    <option>Men</option>
-                    <option>Women</option>
-                    <option>Kids</option>
-                    <option>Accessories</option>
+                  <select class="form-select" id="categorySelect">
+                    <option value="" selected>All</option>
+                    <option value="Men">Men</option>
+                    <option value="Women">Women</option>
                   </select>
                 </div>
+
                 <div class="col-md-6">
-                  <label class="form-label">Price</label>
-                  <select class="form-select">
-                    <option selected>Any</option>
-                    <option>Under ₹999</option>
-                    <option>₹1,000 – ₹2,499</option>
-                    <option>₹2,500 – ₹4,999</option>
-                    <option>₹5,000+</option>
+                  <label class="form-label">Type</label>
+                  <select class="form-select" id="typeSelect">
+    <option value="" selected>All</option>
+    <option value="Traditional">Traditional</option>
+    <option value="Casual">Casual</option>
                   </select>
                 </div>
-                <div class="col-12 d-grid d-sm-flex gap-2">
-                  <a href="products.html" class="btn btn-dark btn-lg flex-fill"
-                    >Show Results</a
-                  >
-                  <a
-                    href="products.html"
-                    class="btn btn-outline-dark btn-lg flex-fill"
-                    >Advanced Filters</a
-                  >
+
+                <div class="col-12 d-grid d-sm-flex gap-2 flex-center">
+                  <button id="showResultsBtn" class="btn btn-dark btn-lg flex-fill">
+                    Show Results
+                  </button>
                 </div>
                 <div class="col-12 small text-secondary">
                   * We don’t sell online yet. You’ll get store location +
                   details to buy in-person.
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -354,14 +357,16 @@
             >View all <i class="bi bi-arrow-right"></i
           ></a>
         </div>
-        <div class="row g-3">
+        <div class="row g-3 d-flex justify-content-center">
           <div class="col-6 col-md-3">
             <a
               class="text-decoration-none text-dark"
-              href="products.html?category=men"
+              href="products-list.html?audience=Men&category=Casual"
             >
               <div class="cat-tile p-3">
-                <div class="ratio ratio-4x3 bg-light rounded-3 mb-3"></div>
+                <div class="ratio ratio-4x3 bg-light rounded-3 mb-3">
+                  <img src="https://cdn.shopify.com/s/files/1/0420/7073/7058/files/4MSS4315-04_1_69f6e086-e1d4-4a52-a27e-f5787df12f67.jpg?v=1755451742&quality=50" alt="">
+                </div>
                 <h6 class="mb-1">Men</h6>
                 <p class="text-secondary small mb-0">T-shirts, shirts, denim</p>
               </div>
@@ -370,39 +375,31 @@
           <div class="col-6 col-md-3">
             <a
               class="text-decoration-none text-dark"
-              href="products.html?category=women"
+              href="products-list.html?audience=Women&category=Traditional"
             >
               <div class="cat-tile p-3">
-                <div class="ratio ratio-4x3 bg-light rounded-3 mb-3"></div>
+                <div class="ratio ratio-4x3 bg-light rounded-3 mb-3">
+                  <img src="https://cdn.pixabay.com/photo/2022/12/04/07/03/woman-7633843_1280.jpg" alt="">
+                </div>
                 <h6 class="mb-1">Women</h6>
                 <p class="text-secondary small mb-0">Ethnic, western, tops</p>
               </div>
             </a>
           </div>
-          <div class="col-6 col-md-3">
+          <!-- <div class="col-6 col-md-3">
             <a
               class="text-decoration-none text-dark"
               href="products.html?category=kids"
             >
               <div class="cat-tile p-3">
-                <div class="ratio ratio-4x3 bg-light rounded-3 mb-3"></div>
+                <div class="ratio ratio-4x3 bg-light rounded-3 mb-3">
+                  <img src="https://cdn.pixabay.com/photo/2015/06/12/21/54/child-807533_1280.jpg" alt="">
+                </div>
                 <h6 class="mb-1">Kids</h6>
                 <p class="text-secondary small mb-0">Fun fits & accessories</p>
               </div>
             </a>
-          </div>
-          <div class="col-6 col-md-3">
-            <a
-              class="text-decoration-none text-dark"
-              href="products.html?category=accessories"
-            >
-              <div class="cat-tile p-3">
-                <div class="ratio ratio-4x3 bg-light rounded-3 mb-3"></div>
-                <h6 class="mb-1">Accessories</h6>
-                <p class="text-secondary small mb-0">Belts, caps, bags</p>
-              </div>
-            </a>
-          </div>
+          </div> -->
         </div>
       </div>
     </section>
@@ -692,6 +689,24 @@
         otpForm.classList.add("d-none");
         mobileForm.classList.remove("d-none");
       });
+      
+      console.log("script loaded");
+        document.getElementById("showResultsBtn").addEventListener("click", () => {
+    const category = document.getElementById("categorySelect").value;
+    const type = document.getElementById("typeSelect").value;
+    const location = document.getElementById("locationSelect").value;
+
+    const params = new URLSearchParams();
+    
+    if (category) params.append("audience", category);
+    if (type) params.append("category", type);
+    if (location) params.append("location", location);
+    
+    const queryString = params.toString();
+
+    window.location.href = `products-list.html?${queryString}`;
+  });
+    
     </script>
   </body>
 </html>

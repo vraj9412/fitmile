@@ -92,17 +92,13 @@
         color: #ffd700;
         font-size: 1.3rem;
       }
-      .navbar-brand {
-        font-weight: 700;
-        color: #007bff !important;
-      }
     </style>
   </head>
   <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <div class="container">
-        <a class="navbar-brand" href="#">FitMile</a>
+        <a class="navbar-brand fw-bold" href="index.html">FitMile</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -223,28 +219,45 @@
       }
 
       const productName = getQueryParam("name");
-
-      Papa.parse("../myntra_men-shirt.csv", {
-        download: true,
-        header: true,
-        complete: function (results) {
-          const products = results.data;
+      // Papa.parse("./my", {
+      //   download: true,
+      //   header: true,
+      //   complete: function (results) {
+      //     const products = results.data;
+      //     const product = products.find(
+      //       (p) => p.name && p.description.trim() === productName?.trim()
+      //     );
+      //     console.log("Product found:", product);
+      //     if (product) {
+      //       populateProduct(product);
+      //     } else {
+      //       document.getElementById("productContainer").innerHTML =
+      //         "<h3>Product not found</h3>";
+      //     }
+      //   },
+      // });
+      fetch("myntra_men_shirts_clean.json")
+        .then((response) => response.json())
+        .then((products) => {
           const product = products.find(
-            (p) => p.description && p.description.trim() === productName?.trim()
+            (p) => p.name && p.name.trim() === productName?.trim()
           );
-          console.log("Product found:", product);
           if (product) {
             populateProduct(product);
           } else {
             document.getElementById("productContainer").innerHTML =
               "<h3>Product not found</h3>";
           }
-        },
-      });
+        })
+        .catch((error) => {
+          console.error("Error loading JSON:", error);
+          document.getElementById("productContainer").innerHTML =
+            "<h3>Error loading product data</h3>";
+        });
 
       function populateProduct(p) {
         // Images
-        const image = p.image_url;
+        const image = p.image;
         document.getElementById("mainImage").src = image;
 
         // Details
@@ -255,14 +268,14 @@
         // Sizes
         const sizeContainer = document.getElementById("sizeOptions");
         sizeContainer.innerHTML = "";
-        p.sizes.split("|").forEach((size) => {
+        p.sizes.forEach((size) => {
           sizeContainer.innerHTML += `<span class="size-option">${size}</span>`;
         });
 
         // Colors
         const colorContainer = document.getElementById("colorOptions");
         colorContainer.innerHTML = "";
-        p.colors.split("|").forEach((color) => {
+        p.colors.forEach((color) => {
           colorContainer.innerHTML += `<span class="color-circle" style="background:${color}"></span>`;
         });
       }
