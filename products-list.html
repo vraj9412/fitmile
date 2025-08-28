@@ -49,6 +49,7 @@
         transition: transform 0.3s ease;
         overflow: hidden;
         cursor: pointer;
+        font-size: 0.9rem;
       }
       .product-card:hover {
         transform: translateY(-5px);
@@ -56,6 +57,9 @@
       .product-card img {
         height: 250px;
         object-fit: contain;
+      }
+      .card-title-font {
+        font-size: 1.1rem;
       }
       .filter-bar {
         background: #f8f9fa;
@@ -299,7 +303,7 @@
               <div class="card product-card" onclick="viewProduct('${p.name}')">
                 <img src="${p.image}" class="card-img-top" alt="${p.description}" />
                 <div class="card-body">
-                  <h5 class="card-title fw-bold">${p.name}</h5>
+                  <h5 class="card-title card-title-font">${p.name}</h5>
                   <p class="card-text text-muted">₹${p.price}</p>
                 </div>
               </div>`;

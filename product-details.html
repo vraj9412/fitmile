@@ -62,14 +62,11 @@
       }
 
       .product-title {
-        font-size: 2rem;
-        font-weight: 700;
+        font-size: 1.5rem;
       }
 
       .price {
-        font-size: 1.6rem;
-        color: #d32f2f;
-        font-weight: 600;
+        font-size: 1.3rem;
       }
 
       .size-option {
@@ -104,6 +101,7 @@
       .detail-list {
         list-style: none;
         padding-left: 0;
+        font-size: 0.9rem;
       }
 
       .detail-list li::before {
@@ -117,7 +115,10 @@
       .btn-accent:hover {
         filter: brightness(0.95);
         border: 1px solid var(--accent);
-        color: #111;
+        color: var(--accent);
+      }
+      .fw-500 {
+        font-weight: 500;
       }
     </style>
   </head>
@@ -184,21 +185,25 @@
         <div class="col-md-6">
           <h1 class="product-title" id="productTitle"></h1>
           <p class="text-muted" id="productDescription"></p>
-          <p class="price" id="productPrice"></p>
+          <h1 class="price mb-0" id="productPrice"></h1>
+          <p style="font-size: 0.8rem; color: rgb(6, 196, 6); opacity: 0.8">
+            Inclusive of all taxes
+          </p>
+
+          <div class="mt-3">
+            <strong class="fw-500">Product Details:</strong>
+            <ul class="detail-list mt-2" id="productDetailList"></ul>
+          </div>
 
           <div class="mb-3">
-            <strong>Available Sizes:</strong><br />
+            <strong class="fw-500">Available Sizes:</strong>
+            <br />
             <div id="sizeOptions"></div>
           </div>
 
           <div class="mb-4">
-            <strong>Color:</strong><br />
+            <strong class="fw-500">Color:</strong><br />
             <div id="colorOptions"></div>
-          </div>
-
-          <div>
-            <strong>Product Details:</strong>
-            <ul class="detail-list mt-2" id="productDetailList"></ul>
           </div>
 
           <div class="mt-4 d-flex gap-3">
@@ -254,6 +259,15 @@
         document.getElementById("productDescription").innerText = p.description;
         document.getElementById("productPrice").innerText = "₹" + p.price;
 
+        // Details
+        const detailList = document.getElementById("productDetailList");
+        detailList.innerHTML = "";
+        if (Array.isArray(p.detail)) {
+          p.detail.forEach((d) => {
+            detailList.innerHTML += `<li>${d}</li>`;
+          });
+        }
+
         // Sizes
         const sizeContainer = document.getElementById("sizeOptions");
         sizeContainer.innerHTML = "";
@@ -267,15 +281,6 @@
         p.colors.forEach((color) => {
           colorContainer.innerHTML += `<span class="color-circle" style="background-color:${color};"></span>`;
         });
-
-        // Details
-        const detailList = document.getElementById("productDetailList");
-        detailList.innerHTML = "";
-        if (Array.isArray(p.detail)) {
-          p.detail.forEach((d) => {
-            detailList.innerHTML += `<li>${d}</li>`;
-          });
-        }
       }
     </script>
 
